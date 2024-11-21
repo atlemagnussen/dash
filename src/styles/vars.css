@@ -1,0 +1,63 @@
+:root {
+    --brown: #9c4e16;
+    --green: #99c66d;
+    --blue: #4590e6;
+
+    --blue-toad: #646cff;
+    --blue-accar: #535bf2;
+    
+    --blue-trans: rgba(69, 144, 230, 0.9);
+    --light-grey: #f0f0f0;
+
+    --light-grey-trans: rgba(240, 240, 240, 0.7);
+    --white-trans: rgba(255, 255, 255, 0.8);
+    --white-very-trans: rgba(255, 255, 255, 0.1);
+    --red-trans: rgba(248, 3, 3, 0.7);
+
+    --purple-grey: rgba(44, 38, 48, 0.9);
+    --purple-light: rgba(102, 51, 153, 0.6);
+    --purple-hover: rgba(145, 60, 140, 0.4);
+
+    --magenta: rgb(255, 0, 255);
+    --magenta-dark: rgb(139, 0, 139);
+
+    --cyan: rgb(0, 255, 255);
+    --cyan-dark: rgb(0, 139, 139);
+    --cyan-hover: rgba(0, 139, 139, 0.5);
+
+    --red-main: rgb(139, 0, 0);
+    --red-light: rgb(195, 20, 20, 0.5);
+    --red-extra-light: rgb(195, 20, 20, 0.2);
+    --red-strong: rgb(195, 20, 20);
+    --red-hover: rgb(120, 0, 0, 0.2);
+
+    --green-main: rgb(0, 255, 0);
+    --green-dark: rgb(34, 139, 34);
+    --green-extra-dark: rgb(0, 100, 0);
+
+    --cardinal: rgb(196, 30, 58);
+    --cardinal-blue: rgb(196, 30, 90);
+    --cardinal-hover: rgb(196, 30, 90, 0.3);
+
+    --white: rgba(255, 255, 255, 0.87);
+
+    --main-color: var(--red-main);
+    --light-color: var(--red-light);
+    --hover-color: var(--cyan-hover);
+    --header-initials-color: var(--red-strong);
+    --selected-color: var(--cardinal-hover);
+    --default-lang-color: var(--magenta);
+    --toggled-color: var(--red-extra-light);
+
+    --h1-color: var(--cyan-dark);
+    --a-underline-color: var(--cyan-dark);
+    --a-hover-color: var(--cyan);
+
+    --primary-background: var(--purple-grey);
+    --primary-color: var(--white);
+
+    /* don't use var for background, causes double loading */
+    /* --background-pic: url(https://storage.googleapis.com/backslash-project.appspot.com/static/dark-landscape_compact-1.jpg); */
+    /* --background-pic: url(https://storage.googleapis.com/backslash-project.appspot.com/static/dark-landscape-smaller2.jpg); */
+    /*--background-pic: url(https://storage.googleapis.com/atle-static/backgrounds/dark-scull.jpg);*/
+}
