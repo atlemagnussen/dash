@@ -1,0 +1,19 @@
+[
+    {
+        "id": "1",
+        "app": "html-app",
+        "config": "test1",
+        "x": 1, "y": 1, "w": 2, "h": 2
+    },
+    {
+        "id": "2",
+        "app": "html-app",
+        "config": "test2",
+        "x": 6, "y": 2, "w": 2, "h": 2
+    }, {
+        "id": "3",
+        "app": "html-app",
+        "config": "<p>tes3</p>",
+        "x": 11, "y": 3, "w": 2, "h": 2
+    }
+]

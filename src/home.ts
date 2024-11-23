@@ -1,7 +1,9 @@
 import { LitElement, css, html } from "lit"
 import { customElement, state } from "lit/decorators.js"
-import {GridAppConf, getTimestampId} from "./dash"
+import { GridAppConf, getTimestampId } from "./dash"
 import "./components/faIcon"
+import "./apps"
+import { getConfig } from "./backend/dataService"
 
 @customElement('home-view')
 export class HomeView extends LitElement {
@@ -25,32 +27,21 @@ export class HomeView extends LitElement {
             width: 600px;
             flex-basis: 600px;
             flex-grow: 1;
-            --gs-lines-color: var(--primary-color);
+            --dash-lines-color: var(--primary-color);
         }
     `
+    @state()
+    gridApps: GridAppConf[] = []
 
-    gridApps: GridAppConf[] = [
-        {
-            id: getTimestampId(),
-            content: "test1",
-            x: 1, y: 1, w: 2, h: 2
-        },
-        {
-            id: getTimestampId(),
-            content: "test2",
-            x: 6, y: 2, w: 2, h: 2
-        }, {
-            id: getTimestampId(),
-            content: "tes3",
-            x: 11, y: 3, w: 2, h: 2
-        }
-    ]
-
+    async getData() {
+        this.gridApps = await getConfig()
+    }
 
     add() {
         this.gridApps.push({
             id: getTimestampId(),
-            content: "test",
+            app: "html-app",
+            config: "test",
             x: 1, y: 1, w: 2, h: 2
         })
         this.requestUpdate()
@@ -62,6 +53,10 @@ export class HomeView extends LitElement {
         this.adminMode = adminMode
     }
 
+    connectedCallback(): void {
+        super.connectedCallback()
+        this.getData()
+    }
     @state()
     adminMode = false
 

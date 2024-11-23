@@ -11,7 +11,8 @@ export class DashGrid extends LitElement {
         :host {
             display: flex;
             flex-direction: column;
-            --gs-lines-color: #111;
+            --dash-lines-color: #111;
+            --dash-placeholder-border: 4px dotted red;
         }
         .flex-body {
             flex-grow: 1;
@@ -20,12 +21,12 @@ export class DashGrid extends LitElement {
             gap: 1px;
             &.edit-mode {
                 /* background-color: grey; */
-                background-size: calc(100%/var(--gs-cols, 10)) calc(100%/var(--gs-rows, 10));
+                background-size: calc(100%/var(--dash-cols, 10)) calc(100%/var(--dash-rows, 10));
                 background-image:
-                    linear-gradient(to right, var(--gs-lines-color) 1px, transparent 1px),
-                    linear-gradient(to bottom, var(--gs-lines-color) 1px, transparent 1px);
-                border-bottom: 1px var(--gs-lines-color) solid;
-                border-right: 1px var(--gs-lines-color) solid;
+                    linear-gradient(to right, var(--dash-lines-color) 1px, transparent 1px),
+                    linear-gradient(to bottom, var(--dash-lines-color) 1px, transparent 1px);
+                border-bottom: 1px var(--dash-lines-color) solid;
+                border-right: 1px var(--dash-lines-color) solid;
             }
 
             div {
@@ -48,7 +49,7 @@ export class DashGrid extends LitElement {
             }
             .placeholder {
                 background: transparent;
-                border: 4px dotted black;
+                border: var(--dash-placeholder-border);
             }
             .app {
                 background: rebeccapurple;
@@ -69,10 +70,10 @@ export class DashGrid extends LitElement {
     edit = false
 
     @state()
-    placeholder: GridAppConf | null = null
+    placeholder: GridApp | null = null
 
-    calcRowCol(e: DragEvent): GridAppConf {
-        let ga: GridAppConf = { id: "placeholder", content: "", x: 0, y: 0, w: 1, h: 1 }
+    calcRowCol(e: DragEvent): GridApp {
+        let ga: GridApp = { id: "placeholder", x: 0, y: 0, w: 1, h: 1 }
 
         if (!this.flexBody)
             return ga
@@ -94,8 +95,8 @@ export class DashGrid extends LitElement {
         const rowD = e.y - b.top
         const y = Math.ceil(rowD / heightPerBlock)
 
-        const {w,h,content} = conf
-        ga = { id, x, y, w, h, content }
+        const {w,h} = conf
+        ga = { id, x, y, w, h }
 
         return ga
     }
@@ -190,10 +191,10 @@ export class DashGrid extends LitElement {
 
     render() {
         const styles = {
-            "--gs-rows": this.rows,
-            "--gs-cols": this.cols,
-            "grid-template-rows": `repeat(var(--gs-rows), 1fr)`,
-            "grid-template-columns": `repeat(var(--gs-cols), 1fr)`
+            "--dash-rows": this.rows,
+            "--dash-cols": this.cols,
+            "grid-template-rows": `repeat(var(--dash-rows), 1fr)`,
+            "grid-template-columns": `repeat(var(--dash-cols), 1fr)`
         }
         const classes = { "flex-body": true, "edit-mode": this.edit }
         return html`
@@ -201,19 +202,21 @@ export class DashGrid extends LitElement {
                 ${this.placeholder ? html`
                     <grid-app class="placeholder" id="placeholder"
                         x=${this.placeholder.x} y=${this.placeholder.y} w=${this.placeholder.w} h=${this.placeholder.h}>
+                        <span></span>
                     </grid-app>
                 ` : ''}
                 ${this.apps.map(a => 
                     html`
                         <grid-app class="app" x=${a.x} y=${a.y} w=${a.w} h=${a.h}
                             .edit=${this.edit}
-                            .content=${a.content} id=${a.id}
+                            id=${a.id}
                             draggable="${this.edit}"
                             @dragstart=${(e:DragEvent) => this.dragStart(e)}
                             @drag=${(e:DragEvent) => this.dragging(e)}
                             @dragend=${(e:DragEvent) => this.dragEnd(e)}
                             @gridappresized=${(e: CustomEvent) => this.appResized(e, a.id)}
                         >
+                            <app-resolver .appconf=${a}></app-resolver>
                         </grid-app>
                     `
                 )}

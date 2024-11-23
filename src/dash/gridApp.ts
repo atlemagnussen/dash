@@ -1,8 +1,8 @@
 import { LitElement, PropertyValues, css, html } from "lit"
 import { customElement, property, query, state } from "lit/decorators.js"
-import { unsafeHTML } from "lit/directives/unsafe-html.js"
 import { styleMap } from "lit/directives/style-map.js"
 import { classMap } from "lit/directives/class-map.js"
+import { AppResolver } from "../apps/appResolver"
 
 @customElement('grid-app')
 export class GridApp extends LitElement {
@@ -29,9 +29,6 @@ export class GridApp extends LitElement {
 
     @property({attribute: true, type: Boolean})
     edit = false
-
-    @property({attribute: false})
-    content = "<span></span>"
 
     @property({attribute: true, type: Number})
     x = 1
@@ -69,11 +66,12 @@ export class GridApp extends LitElement {
             height: this.box.height + "px"
         }
     }
+
     @query(".resizer")
     resizerEl: HTMLDivElement | undefined
 
-    onResize(e:any) {
-        console.log(e)
+    onResize() {
+        //console.log(e)
     }
     
     observeResize() {
@@ -138,7 +136,9 @@ export class GridApp extends LitElement {
                     @mouseup=${() => this.mouseUp()}>
                 </div>
             ` : html``}
-            ${unsafeHTML(this.content)}
+            <slot>
+                <span>Loading content ...</span>
+            </slot>
         `
     }
     updated(changedProps: PropertyValues) {
@@ -153,6 +153,10 @@ export class GridApp extends LitElement {
                     this.observeResize()
                 else
                     this.unobserve()
+                
+                const appResolver = this.querySelector("app-resolver") as AppResolver | null
+                if (appResolver)
+                    appResolver.editMode = this.edit
             }
         }
     }

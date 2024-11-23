@@ -4,10 +4,6 @@ import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons"
 
 @customElement('menu-popup')
 export class MenuPopup extends LitElement {
-
-    constructor() {
-        super()
-    }
     static styles = css`
         :host {
             display: inline-block;

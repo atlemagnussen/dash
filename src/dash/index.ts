@@ -1,6 +1,7 @@
 import "./dashGrid"
 
 export interface GridApp {
+    id: string
     x: number
     y: number
     w: number
@@ -8,8 +9,8 @@ export interface GridApp {
 }
 
 export interface GridAppConf extends GridApp {
-    id: string
-    content: string
+    app: string
+    config: any
 }
 
 export function getTimestampId() {
