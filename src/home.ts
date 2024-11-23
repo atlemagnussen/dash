@@ -1,6 +1,7 @@
 import { LitElement, css, html } from "lit"
 import { customElement, state } from "lit/decorators.js"
 import {GridAppConf, getTimestampId} from "./dash"
+import "./components/faIcon"
 
 @customElement('home-view')
 export class HomeView extends LitElement {
@@ -74,7 +75,6 @@ export class HomeView extends LitElement {
                         type="checkbox" .checked=${this.adminMode}
                         @change=${(e: Event) => this.adminModeChange(e)}></input>
                 </label>
-                
             </header>
             <dash-grid .apps=${this.gridApps} 
                 rows="15" cols="15" 
