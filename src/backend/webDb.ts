@@ -16,7 +16,7 @@ function openDb() : Promise<IDBDatabase>{
         }
         dbReq.onupgradeneeded = () => {
             let dbu = dbReq.result
-            let txn = dbReq.transaction
+            //let txn = dbReq.transaction
             console.log(`IndexedDB:: Upgrade DB ${dbu.name} to version ${dbu.version}`)
             if (dbu.version == 1) {
                 const appConfigStore = dbu.createObjectStore(Tables.AppConfigs, { keyPath: "id"})
