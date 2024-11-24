@@ -1,7 +1,8 @@
 FROM busybox:1.35 as base
 
-USER app
-WORKDIR /app
+RUN adduser -D static
+USER static
+WORKDIR /home/static
 
 FROM node:22.11 as build
 
@@ -15,12 +16,9 @@ RUN npm install
 RUN npm run build
 
 # Create a non-root user to own the files and run our server
-# RUN adduser -D static
-# USER static
-# WORKDIR /home/static
 
 FROM base AS final
-WORKDIR /app
+WORKDIR /home/static
 COPY --from=build /src/dist .
 
 # Run BusyBox httpd
