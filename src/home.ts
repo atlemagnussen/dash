@@ -50,11 +50,16 @@ export class HomeView extends LitElement {
     page: dataService.GridPage = { id: pageId, rows: 10, cols: 10, apps: []}
 
     async getAppsConf() {
-        const page = await dataService.getPageConfig(pageId)
-        if (page) {
-            this.page = page
-            this.gridApps = this.page.apps
+        let page = await dataService.getPageConfig(pageId)
+        if (!page) {
+            page = {
+                id: pageId,
+                rows: 10, cols: 10, apps: []
+            }
+            await dataService.savePage(page)
         }
+        this.page = page
+        this.gridApps = this.page.apps
     }
 
     addApp() {

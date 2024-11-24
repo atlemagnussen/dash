@@ -1,5 +1,5 @@
 const DBNAME = "dash"
-const DBVERSION = 3
+const DBVERSION = 1
 export enum Tables {
     AppConfigs = "AppConfigs",
     GridPages = "GridPages"
@@ -21,24 +21,19 @@ function openDb() : Promise<IDBDatabase>{
             if (dbu.version == 1) {
                 const appConfigStore = dbu.createObjectStore(Tables.AppConfigs, { keyPath: "id"})
                 appConfigStore.createIndex("id", "id", { unique: true })
-            }
-            if (dbu.version == 2) {
+
+                appConfigStore.createIndex("pageId", "pageId", { unique: false })
+
                 const pageStore = dbu.createObjectStore(Tables.GridPages, { keyPath: "id"})
                 pageStore.createIndex("id", "id", { unique: true })
             }
-            if (dbu.version == 3) {
-                if (txn) {
-                    const appConfigStore = txn.objectStore(Tables.AppConfigs)
-                    appConfigStore.createIndex("pageId", "pageId", { unique: true })
-                }
-            }
-            if (dbu.version == 4) {
-                if (txn) {
-                    const appConfigStore = txn.objectStore(Tables.AppConfigs)
-                    appConfigStore.deleteIndex("pageId")
-                    appConfigStore.createIndex("pageId", "pageId", { unique: false })
-                }
-            }
+            // update existing store
+            // if (dbu.version == 3) {
+            //     if (txn) {
+            //         const appConfigStore = txn.objectStore(Tables.AppConfigs)
+            //         appConfigStore.createIndex("pageId", "pageId", { unique: true })
+            //     }
+            // }
         }
     })
 }

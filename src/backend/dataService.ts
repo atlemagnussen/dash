@@ -30,7 +30,9 @@ export async function getAppConfig(id: string) {
 }
 
 export async function getPageConfig(id: string) {
-    const page = await db.getOneIem<GridPage>(db.Tables.GridPages, id)
+    let page = await db.getOneIem<GridPage>(db.Tables.GridPages, id)
+    if (!page)
+        return null
     const apps = await getAllAppConfigs(id)
     const appsUpdated = apps.map(a => {
         a.pageId = page.id
