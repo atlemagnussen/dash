@@ -1,0 +1,9 @@
+node_modules
+*.png
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+dist
+.git
+npm-debug.log
+README.md
+Dockerfile

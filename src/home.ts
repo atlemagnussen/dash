@@ -54,7 +54,7 @@ export class HomeView extends LitElement {
         if (!page) {
             page = {
                 id: pageId,
-                rows: 10, cols: 10, apps: []
+                rows: 15, cols: 30, apps: []
             }
             await dataService.savePage(page)
         }
