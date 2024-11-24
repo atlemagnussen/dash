@@ -3,7 +3,7 @@ import { customElement, state } from "lit/decorators.js"
 import { GridAppConf, getTimestampId } from "./dash"
 import "./components/faIcon"
 import "./apps"
-import { getConfig } from "./backend/dataService"
+import * as dataService from "./backend/dataService"
 
 @customElement('home-view')
 export class HomeView extends LitElement {
@@ -33,8 +33,8 @@ export class HomeView extends LitElement {
     @state()
     gridApps: GridAppConf[] = []
 
-    async getData() {
-        this.gridApps = await getConfig()
+    async getAppsConf() {
+        this.gridApps = await dataService.getAllAppConfigs()
     }
 
     add() {
@@ -55,8 +55,9 @@ export class HomeView extends LitElement {
 
     connectedCallback(): void {
         super.connectedCallback()
-        this.getData()
+        this.getAppsConf()
     }
+
     @state()
     adminMode = false
 
@@ -73,8 +74,15 @@ export class HomeView extends LitElement {
             </header>
             <dash-grid .apps=${this.gridApps} 
                 rows="15" cols="15" 
-                .edit=${this.adminMode}>
+                .edit=${this.adminMode}
+                @app-config-changed=${(e: CustomEvent) => this.updateConf(e)}>
             </dash-grid>
         `
+    }
+    async updateConf(e: CustomEvent) {
+        const conf = e.detail as GridAppConf
+        console.log("save conf", conf)
+        await dataService.saveAppConfig(conf)
+        this.getAppsConf()
     }
 }

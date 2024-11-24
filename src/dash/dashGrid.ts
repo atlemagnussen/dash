@@ -215,6 +215,7 @@ export class DashGrid extends LitElement {
                             @drag=${(e:DragEvent) => this.dragging(e)}
                             @dragend=${(e:DragEvent) => this.dragEnd(e)}
                             @gridappresized=${(e: CustomEvent) => this.appResized(e, a.id)}
+                            @config-changed=${(e: CustomEvent) => this.configChanged(e, a.id)}
                         >
                             <app-resolver .appconf=${a}></app-resolver>
                         </grid-app>
@@ -222,5 +223,15 @@ export class DashGrid extends LitElement {
                 )}
             </section>
         `
+    }
+    configChanged(e: CustomEvent, id: string) {
+        const appConf = this.apps.find(a => a.id == id)
+        if (appConf) {
+            const conf = e.detail
+            appConf.config = conf
+            this.dispatchEvent(new CustomEvent("app-config-changed", {
+                bubbles: false, composed: true, detail: appConf
+            }))
+        }
     }
 }
