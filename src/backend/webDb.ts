@@ -16,6 +16,7 @@ function openDb() : Promise<IDBDatabase>{
         }
         dbReq.onupgradeneeded = () => {
             let dbu = dbReq.result
+            let txn = dbReq.transaction
             console.log(`IndexedDB:: Upgrade DB ${dbu.name} to version ${dbu.version}`)
             if (dbu.version == 1) {
                 const appConfigStore = dbu.createObjectStore(Tables.AppConfigs, { keyPath: "id"})
@@ -26,10 +27,16 @@ function openDb() : Promise<IDBDatabase>{
                 pageStore.createIndex("id", "id", { unique: true })
             }
             if (dbu.version == 3) {
-                var txn = dbReq.transaction
                 if (txn) {
                     const appConfigStore = txn.objectStore(Tables.AppConfigs)
                     appConfigStore.createIndex("pageId", "pageId", { unique: true })
+                }
+            }
+            if (dbu.version == 4) {
+                if (txn) {
+                    const appConfigStore = txn.objectStore(Tables.AppConfigs)
+                    appConfigStore.deleteIndex("pageId")
+                    appConfigStore.createIndex("pageId", "pageId", { unique: false })
                 }
             }
         }
@@ -55,18 +62,22 @@ export function getOneIem<T>(table: Tables, query: string): Promise<T> {
     
 }
 
-export function getAll<T>(table: Tables): Promise<T[]> {
+export function getMany<T>(table: Tables, pageId: string): Promise<T[]> {
     return openDbPromise.then(db => {
 
         return new Promise((resolve, reject) => {
             if (!db)
                 reject("not connected")
             
-            const store = db.transaction([table]).objectStore(table)
+            const tx = db.transaction([table], "readonly")
+            const store = tx.objectStore(table)
+            const pageIndex = store.index("pageId")
+
+            const query = pageIndex.getAll(pageId)
             
-            const req = store.getAll()
-            req.onsuccess = () => resolve(req.result)
-            req.onerror = err => reject(err)
+            //const req = store.getAll(pageId)
+            query.onsuccess = () => resolve(query.result)
+            query.onerror = err => reject(err)
         })
     })
 }

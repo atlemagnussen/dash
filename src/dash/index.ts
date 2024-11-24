@@ -11,6 +11,7 @@ export interface GridApp {
 export interface GridAppConf extends GridApp {
     app: string
     config: any
+    [others: string]: any
 }
 
 export function getTimestampId() {

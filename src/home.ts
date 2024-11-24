@@ -4,6 +4,7 @@ import { GridAppConf, getTimestampId } from "./dash"
 import "./components/faIcon"
 import "./apps"
 import * as dataService from "./backend/dataService"
+import { GridAppPageConf } from "./backend/dataService"
 
 const pageId = "demopage"
 
@@ -56,13 +57,16 @@ export class HomeView extends LitElement {
         }
     }
 
-    add() {
-        this.gridApps.push({
+    addApp() {
+        const newApp = {
             id: getTimestampId(),
+            pageId,
             app: "html-app",
             config: "test",
             x: 1, y: 1, w: 2, h: 2
-        })
+        }
+        dataService.saveAppConfig(newApp)
+        this.gridApps.push(newApp)
         this.requestUpdate()
     }
 
@@ -123,6 +127,12 @@ export class HomeView extends LitElement {
                                             value=${this.page.cols} @change=${(e: Event) => this.colsChange(e)}>
                                     </label>
                                 </li>
+                                <li>
+                                    <label for="newapp">
+                                        NewApp
+                                        <button @click=${() => this.addApp()}>Add</button>
+                                    </label>
+                                </li>
                             `: html`
                                 <span>no page</span>
                             `}
@@ -149,7 +159,7 @@ export class HomeView extends LitElement {
     async updateConf(e: CustomEvent) {
         const conf = e.detail as GridAppConf
         console.log("save conf", conf)
-        await dataService.saveAppConfig(conf)
+        await dataService.saveAppConfig(conf as GridAppPageConf)
         this.getAppsConf()
     }
 }

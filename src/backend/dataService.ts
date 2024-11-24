@@ -1,7 +1,7 @@
 import { GridAppConf } from "../dash"
 import * as db from "./webDb"
 
-interface GridAppPageConf extends GridAppConf {
+export interface GridAppPageConf extends GridAppConf {
     pageId: string
 }
 
@@ -31,7 +31,7 @@ export async function getAppConfig(id: string) {
 
 export async function getPageConfig(id: string) {
     const page = await db.getOneIem<GridPage>(db.Tables.GridPages, id)
-    const apps = await getAllAppConfigs()
+    const apps = await getAllAppConfigs(id)
     const appsUpdated = apps.map(a => {
         a.pageId = page.id
         return a
@@ -44,7 +44,7 @@ export async function savePage(page: GridPage) {
     await db.saveOneItem<GridPage>(db.Tables.GridPages, page, !!exists)
 }
 
-export async function getAllAppConfigs() {
-    const values = await db.getAll<GridAppPageConf>(db.Tables.AppConfigs)
+export async function getAllAppConfigs(pageId: string) {
+    const values = await db.getMany<GridAppPageConf>(db.Tables.AppConfigs, pageId)
     return values
 }
