@@ -6,6 +6,7 @@ WORKDIR /app
 
 COPY . .
 
+RUN npm install
 #build client
 RUN npm run build
 
