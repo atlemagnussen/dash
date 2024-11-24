@@ -1,7 +1,8 @@
 const DBNAME = "dash"
-const DBVERSION = 1
+const DBVERSION = 3
 export enum Tables {
-    AppConfigs = "AppConfigs"
+    AppConfigs = "AppConfigs",
+    GridPages = "GridPages"
 }
 
 function openDb() : Promise<IDBDatabase>{
@@ -15,8 +16,22 @@ function openDb() : Promise<IDBDatabase>{
         }
         dbReq.onupgradeneeded = () => {
             let dbu = dbReq.result
-            const objectStore = dbu.createObjectStore(Tables.AppConfigs, { keyPath: "id"})
-            objectStore.createIndex("id", "id", { unique: true })
+            console.log(`IndexedDB:: Upgrade DB ${dbu.name} to version ${dbu.version}`)
+            if (dbu.version == 1) {
+                const appConfigStore = dbu.createObjectStore(Tables.AppConfigs, { keyPath: "id"})
+                appConfigStore.createIndex("id", "id", { unique: true })
+            }
+            if (dbu.version == 2) {
+                const pageStore = dbu.createObjectStore(Tables.GridPages, { keyPath: "id"})
+                pageStore.createIndex("id", "id", { unique: true })
+            }
+            if (dbu.version == 3) {
+                var txn = dbReq.transaction
+                if (txn) {
+                    const appConfigStore = txn.objectStore(Tables.AppConfigs)
+                    appConfigStore.createIndex("pageId", "pageId", { unique: true })
+                }
+            }
         }
     })
 }

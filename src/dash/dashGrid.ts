@@ -54,6 +54,9 @@ export class DashGrid extends LitElement {
             .app {
                 background: rebeccapurple;
             }
+            grid-app {
+                aspect-ratio: 1/1;
+            }
         }
     `
 
@@ -186,6 +189,9 @@ export class DashGrid extends LitElement {
         const heightCell = b.height / this.cols
         conf.w = Math.round(box.width / widthCell)
         conf.h = Math.round(box.height / heightCell)
+        this.dispatchEvent(new CustomEvent("app-config-changed", {
+            bubbles: false, composed: true, detail: conf
+        }))
         this.requestUpdate()
     }
 

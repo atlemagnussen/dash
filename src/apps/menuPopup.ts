@@ -30,47 +30,15 @@ export class MenuPopup extends LitElement {
         button:hover {
             background: grey;
         }
-
-        @position-try --custom-left {
-            position-area: left;
-            margin: 0 10px 0 -300px;
-        }
-
-        @position-try --custom-bottom {
-            top: anchor(bottom);
-            justify-self: anchor-center;
-            margin: 10px 0 0 0;
-            position-area: none;
-        }
-
-        @position-try --custom-right {
-            left: calc(anchor(right) + 10px);
-            align-self: anchor-center;
-            width: 100px;
-            position-area: none;
-        }
-
-        @position-try --custom-bottom-right {
-            position-area: bottom right;
-            margin: 10px 0 0 10px;
-        }
         div#menu-popup {
             position: fixed;
             border-radius: 5px;
             margin: 0;
             position-anchor: --anchor-button;
-            inset-area: right;
-            /* top: anchor(bottom);
-            left: anchor(left); */
-            /* position-try-options: flip-block, flip-inline, flip-block flip-inline; */
-            position-try-fallbacks:
-                --custom-left, --custom-bottom,
-                --custom-right, --custom-bottom-right;
-            /* justify-self: anchor-center; */
+            top: anchor(bottom);
+            left: anchor(left);
         }
         ::backdrop {
-            /* backdrop-filter: invert(.8); */
-            /* backdrop-filter: grayscale(1); */
             backdrop-filter: blur(5px)
         }
     `

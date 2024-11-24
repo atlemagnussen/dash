@@ -1,6 +1,17 @@
 import { GridAppConf } from "../dash"
 import * as db from "./webDb"
 
+interface GridAppPageConf extends GridAppConf {
+    pageId: string
+}
+
+export interface GridPage {
+    id: string
+    rows: number
+    cols: number
+    apps: GridAppConf[]
+}
+
 export async function getConfig() {
     const res = await fetch("state.json")
     const data = await res.json()
@@ -8,17 +19,32 @@ export async function getConfig() {
     return appConfs
 }
 
-export async function saveAppConfig(appConf: GridAppConf) {
+export async function saveAppConfig(appConf: GridAppPageConf) {
     const exists = await getAppConfig(appConf.id)
     await db.saveOneItem(db.Tables.AppConfigs, appConf, !!exists)
 }
 
 export async function getAppConfig(id: string) {
-    const value = await db.getOneIem<GridAppConf>(db.Tables.AppConfigs, id)
+    const value = await db.getOneIem<GridAppPageConf>(db.Tables.AppConfigs, id)
     return value
 }
 
+export async function getPageConfig(id: string) {
+    const page = await db.getOneIem<GridPage>(db.Tables.GridPages, id)
+    const apps = await getAllAppConfigs()
+    const appsUpdated = apps.map(a => {
+        a.pageId = page.id
+        return a
+    })
+    page.apps = appsUpdated
+    return page
+}
+export async function savePage(page: GridPage) {
+    const exists = await getPageConfig(page.id)
+    await db.saveOneItem<GridPage>(db.Tables.GridPages, page, !!exists)
+}
+
 export async function getAllAppConfigs() {
-    const values = await db.getAll<GridAppConf>(db.Tables.AppConfigs)
+    const values = await db.getAll<GridAppPageConf>(db.Tables.AppConfigs)
     return values
 }
