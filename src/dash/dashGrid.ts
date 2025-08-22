@@ -1,4 +1,4 @@
-import { LitElement, css, html } from "lit"
+import { LitElement, css, html, nothing } from "lit"
 import { customElement, property, query, state } from "lit/decorators.js"
 import { GridAppConf, GridApp } from "."
 import { styleMap } from "lit/directives/style-map.js"
@@ -16,7 +16,8 @@ export class DashGrid extends LitElement {
         }
         .flex-body {
             flex-grow: 1;
-            
+            /* grid-template-columns: repeat(20, 1fr);
+            grid-template-rows: repeat(20, 1fr); */
             display: grid;
             gap: 1px;
             &.edit-mode {
@@ -210,7 +211,7 @@ export class DashGrid extends LitElement {
                         x=${this.placeholder.x} y=${this.placeholder.y} w=${this.placeholder.w} h=${this.placeholder.h}>
                         <span></span>
                     </grid-app>
-                ` : ''}
+                ` : nothing}
                 ${this.apps.map(a => 
                     html`
                         <grid-app class="app" x=${a.x} y=${a.y} w=${a.w} h=${a.h}
