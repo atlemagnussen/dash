@@ -1,6 +1,5 @@
 import {LitElement, html, css} from "lit"
 import {customElement, query} from "lit/decorators.js"
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons"
 
 @customElement('menu-popup')
 export class MenuPopup extends LitElement {
@@ -56,8 +55,7 @@ export class MenuPopup extends LitElement {
         return html`
             <button id="button" popovertarget="menu-popup" popovertargetaction="toggle">
                 <slot name="button">
-                    <fa-icon .icon=${faEllipsisVertical}>
-                    </fa-icon>
+                    m
                 </slot>
             </button>
             

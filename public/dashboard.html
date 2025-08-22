@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid Dashboard</title>
+    <!-- Use Tailwind CSS for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(20, 1fr);
+            grid-template-rows: repeat(20, 1fr);
+            gap: 0.5rem; /* Space between the cells */
+            width: 100%;
+            max-width: 1200px;
+            height: 80vh; /* Adjust height as needed */
+            background-color: #e5e7eb;
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-grid">
+        <!-- 
+         * Each widget is a grid item. Its position and size are controlled by
+         * the 'grid-column' and 'grid-row' properties.
+         * The syntax is 'start-line / end-line' or 'start-line / span count'.
+         *
+         * Widget 1: x=1, y=1, w=8, h=6
+         * grid-column: 1 / span 8 (starts at column line 1, spans 8 columns)
+         * grid-row: 1 / span 6 (starts at row line 1, spans 6 rows)
+         -->
+        <div class="widget bg-white rounded-lg p-4 shadow-lg flex items-center justify-center text-center text-gray-700 font-bold hover:shadow-2xl transition-shadow" 
+            style="grid-column: 1 / span 8; grid-row: 1 / span 6;">
+            Widget 1<br>(1, 1, 8, 6)
+        </div>
+
+        <!-- 
+         * Widget 2: x=9, y=1, w=12, h=4
+         * grid-column: 9 / span 12
+         * grid-row: 1 / span 4
+         -->
+        <div class="widget bg-white rounded-lg p-4 shadow-lg flex items-center justify-center text-center text-gray-700 font-bold hover:shadow-2xl transition-shadow" 
+            style="grid-column: 9 / span 12; grid-row: 1 / span 4;">
+            Widget 2<br>(9, 1, 12, 4)
+        </div>
+
+        <!-- 
+         * Widget 3: x=1, y=7, w=6, h=10
+         * grid-column: 1 / span 6
+         * grid-row: 7 / span 10
+         -->
+        <div class="widget bg-white rounded-lg p-4 shadow-lg flex items-center justify-center text-center text-gray-700 font-bold hover:shadow-2xl transition-shadow" 
+            style="grid-column: 1 / span 6; grid-row: 7 / span 10;">
+            Widget 3<br>(1, 7, 6, 10)
+        </div>
+        
+        <!-- 
+         * Widget 4: x=7, y=5, w=8, h=10
+         * This demonstrates an overlap, which is possible with CSS Grid.
+         * grid-column: 7 / span 8
+         * grid-row: 5 / span 10
+         -->
+        <div class="widget bg-white rounded-lg p-4 shadow-lg flex items-center justify-center text-center text-gray-700 font-bold hover:shadow-2xl transition-shadow" 
+            style="grid-column: 7 / span 8; grid-row: 5 / span 10;">
+            Widget 4<br>(7, 5, 8, 10)
+        </div>
+
+        <!-- 
+         * Widget 5: x=15, y=5, w=6, h=6
+         * grid-column: 15 / span 6
+         * grid-row: 5 / span 6
+         -->
+        <div class="widget bg-white rounded-lg p-4 shadow-lg flex items-center justify-center text-center text-gray-700 font-bold hover:shadow-2xl transition-shadow" 
+            style="grid-column: 15 / span 6; grid-row: 5 / span 6;">
+            Widget 5<br>(15, 5, 6, 6)
+        </div>
+
+        <!-- 
+         * Widget 6: x=7, y=15, w=14, h=6
+         * grid-column: 7 / span 14
+         * grid-row: 15 / span 6
+         -->
+        <div class="widget bg-white rounded-lg p-4 shadow-lg flex items-center justify-center text-center text-gray-700 font-bold hover:shadow-2xl transition-shadow" 
+            style="grid-column: 7 / span 14; grid-row: 15 / span 6;">
+            Widget 6<br>(7, 15, 14, 6)
+        </div>
+    </div>
+
+</body>
+</html>
