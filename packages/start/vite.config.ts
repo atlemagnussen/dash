@@ -26,15 +26,9 @@ export default defineConfig({
     }
   },
   build: {
+    sourcemap: true,
     rollupOptions: {
       external: externals,
-      output: {
-        // Ensure externalized deps stay as bare imports (so browser uses import map)
-        globals: {
-          // If you later use UMD builds and need globals mapping, define here.
-        },
-        sourcemap: true
-      }
     },
     target: 'esnext'
   },
