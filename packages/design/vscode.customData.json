@@ -1,0 +1,32 @@
+{
+    "$schema": "https://raw.githubusercontent.com/microsoft/vscode-html-languageservice/main/docs/customData.schema.json",
+    "version": 1.1,
+    "tags": [
+        {
+            "name": "digilean-logo",
+            "description": "DigiLEAN SVG Logo",
+            "attributes": [
+                {
+                    "name": "spinning",
+                    "description": "make it rotate",
+                    "values": [
+                        {
+                            "name": "true",
+                            "description": "enable"
+                        },
+                        {
+                            "name": "false",
+                            "description": "disable"
+                        }
+                    ]
+                }
+            ],
+            "references": [
+                {
+                    "name": "Documentation",
+                    "url": "https://digilean.com"
+                }
+            ]
+        }
+    ]
+}

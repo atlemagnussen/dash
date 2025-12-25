@@ -1,0 +1,40 @@
+body {
+    --app-shell-nav-width: 240px;
+    --app-shell-nav-width-collapsed: 64px;
+
+    font-size: 1rem;
+    line-height: 1.3;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+        "nav main";
+    height: 100vh;
+    overflow: hidden;
+    background: var(--wa-color-surface-default);
+    color: var(--wa-color-text-normal);
+    -webkit-font-smoothing: antialiased;
+
+    left-menu {
+        grid-area: nav;
+    }
+
+    main {
+        grid-area: main;
+        overflow: auto;
+        padding: 1rem 1.2rem 1.6rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 1.6rem;
+    }
+
+    .dev-placeholder {
+        opacity: 0.5;
+        font-size: 1rem;
+        font-style: italic;
+    }
+
+    wa-button {
+        font-size: 1rem
+    }
+}
