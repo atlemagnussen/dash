@@ -6,7 +6,7 @@
     "types": "dist/index.d.ts",
     "type": "module",
     "dependencies": {
-        "@dash/grid": "0.1.0"
+        "@dash/design": "0.1.0"
     },
     "scripts": {
         "start": "npm run vite:dev",

@@ -22,6 +22,7 @@ export default defineConfig({
     alias: {
       // Keep in sync with tsconfig.base.json paths
       "@dash/grid": path.join(packagesPath, "grid", "src"),
+      "@dash/design": path.join(packagesPath, "design", "src"),
     }
   },
   build: {

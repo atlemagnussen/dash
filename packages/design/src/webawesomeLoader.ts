@@ -16,7 +16,7 @@ const modulesToLoad = [
     "/components/textarea/textarea.js"
 ]
 
-const baseUrl = "https://static.logout.work/webawesome@3.1.0/dist"
+const baseUrl = "https://static.logout.work/webawesome/3.1.0/dist"
 
 const mainCss = "/styles/themes/default.css"
 

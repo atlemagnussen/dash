@@ -8,8 +8,8 @@ html {
 }
 
 body {
-  background: var(--dash-main-background);
-  color: var(--dash-main-text);
+  background: var(--wa-color-surface-default);
+  color: var(--wa-color-text-normal);
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1rem;
   margin: 0;

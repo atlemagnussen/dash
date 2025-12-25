@@ -17,6 +17,9 @@
         "skipLibCheck": true,
         "baseUrl": ".",
         "paths": {
+            "@dash/design": [
+                "packages/design/src/index.ts"
+            ],
             "@dash/grid": [
                 "packages/grid/src/index.ts"
             ],

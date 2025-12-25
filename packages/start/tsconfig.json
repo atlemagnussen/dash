@@ -7,7 +7,7 @@
     },
     "references": [
         {
-            "path": "../grid"
+            "path": "../design"
         }
     ],
     // Only compile this package's own source; referenced packages are built via project references.
