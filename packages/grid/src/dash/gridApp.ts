@@ -2,7 +2,7 @@ import { LitElement, PropertyValues, css, html } from "lit"
 import { customElement, property, query, state } from "lit/decorators.js"
 import { styleMap } from "lit/directives/style-map.js"
 import { classMap } from "lit/directives/class-map.js"
-import { AppResolver } from "../apps/appResolver"
+import { AppResolver } from "../apps/appResolver.js"
 
 @customElement('grid-app')
 export class GridApp extends LitElement {

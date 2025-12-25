@@ -1,0 +1,22 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "dist",
+        "rootDir": "src",
+        "composite": true
+    },
+    "references": [
+        {
+            "path": "../grid"
+        }
+    ],
+    // Only compile this package's own source; referenced packages are built via project references.
+    "include": [
+        "css.d.ts",
+        "src",
+    ],
+    "exclude": [
+        "public",
+        "dist"
+    ]
+}

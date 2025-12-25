@@ -1,0 +1,31 @@
+:root {
+  --dash-main-background: #2b2d2e;
+  --dash-main-text: #fff;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  background: var(--dash-main-background);
+  color: var(--dash-main-text);
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+section#loading-screen {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  figure.digilean-logo {
+    width: 15rem;
+    height: 15rem;
+  }
+}

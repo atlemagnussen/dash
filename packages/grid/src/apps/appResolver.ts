@@ -2,7 +2,7 @@ import {LitElement, css} from "lit"
 import {html} from "lit/static-html.js"
 import {customElement, property, state} from "lit/decorators.js"
 import { unsafeStatic } from "lit/static-html.js"
-import { GridAppConf } from "../dash"
+import { GridAppConf } from "../dash/index.js"
 
 @customElement('app-resolver')
 export class AppResolver extends LitElement {

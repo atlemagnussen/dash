@@ -1,0 +1,19 @@
+{
+    "name": "@dash/start",
+    "version": "0.1.0",
+    "private": false,
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "type": "module",
+    "dependencies": {
+        "@dash/grid": "0.1.0"
+    },
+    "scripts": {
+        "start": "npm run vite:dev",
+        "vite:dev": "vite",
+        "vite:build": "vite build",
+        "build": "tsc -b",
+        "preview": "vite preview",
+        "deploy:swa": "swa deploy dist --env Production"
+    }
+}

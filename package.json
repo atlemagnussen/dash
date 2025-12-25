@@ -1,21 +1,24 @@
 {
   "name": "dash",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "workspaces": [
+        "packages/*"
+    ],
   "scripts": {
-    "start": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "server": "tsx ./server/index.ts"
+    "start": "cd packages/start && npm start",
+    "build": "tsc -b",
+    "build:force": "tsc -b --force",
+    "build:watch": "tsc -b -w"
   },
   "dependencies": {
-    "lit": "^3.2.1"
+    "@awesome.me/webawesome": "^3.1.0",
+    "lit": "^3.2.1",
+    "prettier": "^3.7.4"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0",
     "@types/node": "^22.9.3",
-    "express": "^4.21.1",
     "tsx": "^4.19.2",
     "typescript": "~5.6.2",
     "vite": "^7.1.3"

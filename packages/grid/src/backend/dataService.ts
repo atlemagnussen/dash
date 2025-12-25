@@ -1,5 +1,5 @@
-import { GridAppConf } from "../dash"
-import * as db from "./webDb"
+import { GridAppConf } from "../dash/index.js"
+import * as db from "./webDb.js"
 
 export interface GridAppPageConf extends GridAppConf {
     pageId: string

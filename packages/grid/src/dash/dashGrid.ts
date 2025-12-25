@@ -1,6 +1,6 @@
 import { LitElement, css, html, nothing } from "lit"
 import { customElement, property, query, state } from "lit/decorators.js"
-import { GridAppConf, GridApp } from "."
+import { GridAppConf, GridApp } from "./index.js"
 import { styleMap } from "lit/directives/style-map.js"
 import { classMap } from "lit/directives/class-map.js"
 import "./gridApp"
